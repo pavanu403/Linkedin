@@ -29,12 +29,12 @@ public class LinkedinForgotpassword extends TestUtils{
 			String Sheet = "Sheet1";
 			FileInputStream fis=new FileInputStream("./supportFiles/messages.properties");
 			prop.load(fis);
-			HomePageObjects.forgotPasswordlink(driver).click();
-			Assert.assertEquals(prop.getProperty("forgotPageTitle"),driver.getTitle());
 			int rowCount = ExcelUtils.getRowCount(xl, Sheet);
 			System.out.println("row count:"+rowCount);
 			for (int i=1;i<=rowCount;i++)
-			{   
+			{       driver.navigate().to(baseUrl);
+				HomePageObjects.forgotPasswordlink(driver).click();
+				Assert.assertEquals(prop.getProperty("forgotPageTitle"),driver.getTitle());
 				String inputType=ExcelUtils.getCellValue(xl, Sheet, i, 0);
 				String UserName=ExcelUtils.getCellValue(xl, Sheet, i, 1);
 				HomePageObjects.forgotPasswordInput(driver).sendKeys(UserName);
